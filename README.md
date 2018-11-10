@@ -5,3 +5,5 @@ Fall 2018 Deep Learning Project Repo
 libraries:
 torch 
 lua
+luarocks
+luasocket

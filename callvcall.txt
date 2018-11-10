@@ -1,0 +1,2 @@
+20000 20001
+SCORE:6600|-6600:always_call|always_call
