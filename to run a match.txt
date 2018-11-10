@@ -32,3 +32,9 @@ DeepStack but bluffing
 DeepStack but risk-averse
 DeepStack trained on risk-averse self?
 
+four types of modifications to bots:
+
+1. rule-based (built in python, style similar to always_call.py)
+2. rule-based on top of DeepStack NN (edit code in DeepStack-Leduc/Source/Player/continual_resolving.lua)
+3. modified NN training (edit code in DeepStack-Leduc/Source/Training/train.lua)
+4. modified NN structure (edit code in DeepStack-Leduc/Source/Nn/net_builder.lua, DeepStack-Leduc/Source/Settings/arguments.lua)
