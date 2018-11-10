@@ -1,20 +1,7 @@
-# deep_learning_project
-Fall 2018 Deep Learning Project Repo
-
-
-libraries:
-torch 
-lua
-luarocks
-luasocket
-
-
 to run a match:
 
 1. connect the server.  
 ./DeepStack-Leduc/ACPCServer/dealer <name_of_game> ./DeepStack-Leduc/ACPCServer/leduc.game <#hands> <rngSeed> <p1name> <p2name> -p 20000,20001 > <name_of_output_file>
-
-put the output file in the folder "outputs" naming convention should be number of rounds.player1.player2.txt
 
 2. in separate tab, connect player 1
 3. in separate tab, connect player 2
