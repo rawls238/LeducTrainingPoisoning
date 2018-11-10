@@ -1,2 +1,0 @@
-20000 20001
-SCORE:10800|-10800:always_call|allin
