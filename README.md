@@ -8,13 +8,10 @@ lua
 luarocks
 luasocket
 
-
 to run a match:
 
 1. connect the server.  
 ./DeepStack-Leduc/ACPCServer/dealer <name_of_game> ./DeepStack-Leduc/ACPCServer/leduc.game <#hands> <rngSeed> <p1name> <p2name> -p 20000,20001 > <name_of_output_file>
-
-put the output file in the folder "outputs" naming convention should be number of rounds.player1.player2.txt
 
 2. in separate tab, connect player 1
 3. in separate tab, connect player 2
@@ -36,12 +33,4 @@ example_player.c (from DeepStack code) -- selects random action:
 
 always_call.py (written by us) -- always calls -- just wants to see what everyone has
 python ./code/ESMCCFR-LEDUC/always_call.py ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>
-
-
-
-
-bots to invent:
-DeepStack but bluffing
-DeepStack but risk-averse
-DeepStack trained on risk-averse self?
 
