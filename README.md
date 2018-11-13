@@ -10,6 +10,18 @@ luasocket
 
 to run a match:
 
+
+SETTING UP ENVIRONMENT
+1. Run make in the ACPCServer Directory: 
+cd DeepStack-Leduc/ACPCServer
+make
+
+2. Setup the acpc client:
+cd code/acpc-python-client/
+python setup.py install
+
+
+CONFIGURING GAME/PLAYERS
 1. connect the server.  
 ./DeepStack-Leduc/ACPCServer/dealer <name_of_game> ./DeepStack-Leduc/ACPCServer/leduc.game <#hands> <rngSeed> <p1name> <p2name> -p 20000,20001 > <name_of_output_file>
 
@@ -17,20 +29,41 @@ to run a match:
 3. in separate tab, connect player 2
 
 
-examples of how to connect a player:
+Players and how to connect them:
 
-pretrained deepstack:
-cd ./DeepStack-Leduc/Source
-th Player/deepstack.lua
+testing players:
 
+always_call.py (written by us) -- always calls
+python ./ruleBased-Players/ESMCCFR-LEDUC/always_call.py ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>
 
 allin_net.py (from previous year's project) -- always raises max amount:
-python ./code/ESMCCFR-LEDUC/allin_net.py ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>
+python ./ruleBased-Players/ESMCCFR-LEDUC/allin_net.py ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>
 
-example_player.c (from DeepStack code) -- selects random action:
+selects random valid action:
 ./DeepStack-Leduc/ACPCServer/example_player ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>
 
+rule-based irrational players:
 
-always_call.py (written by us) -- always calls -- just wants to see what everyone has
-python ./code/ESMCCFR-LEDUC/always_call.py ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>
+Rocks Player (very conservative):
+python ./ruleBased-Players/ESMCCFR-LEDUC/rocks.py ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>
+
+Passive Rocks Player (less conservative):
+python ./ruleBased-Players/ESMCCFR-LEDUC/passiveRocks.py ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>
+
+"Smart" Irrational Players:
+
+Random Bluffer (written by us -- always plays on port 20001):
+cd ./DeepStack-Leduc/Source
+th Player_RandomizedBluffer/deepstack.lua
+
+Rational Player:
+
+pretrained deepstack (always plays on port 20000):
+cd ./DeepStack-Leduc/Source
+th Player_DeepStack/deepstack.lua
+
+
+
+
+
 
