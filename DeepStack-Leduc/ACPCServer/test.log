@@ -1,0 +1,29 @@
+# name/game/hands/seed test leduc.game 100 42
+#--t_response 600000
+#--t_hand 600000
+#--t_per_hand 7000
+STATE:0:cr300f:Qh|Ah:-100|100:player1|player2
+STATE:1:cc/cr300f:Ks|Kh/Qs:-100|100:player2|player1
+STATE:2:cr300f:Ks|As:-100|100:player1|player2
+STATE:3:cc/r300f:As|Qs/Ah:100|-100:player2|player1
+STATE:4:cr300r1200f:Ah|Ks:300|-300:player1|player2
+STATE:5:cc/cr300f:Ks|Qh/Qs:-100|100:player2|player1
+STATE:6:cc/cr300f:Qs|Kh/Ks:-100|100:player1|player2
+STATE:7:r1200f:Ah|Qs:100|-100:player2|player1
+STATE:8:cr300r1200f:As|Qs:300|-300:player1|player2
+STATE:9:cr300f:Qs|Ah:-100|100:player2|player1
+STATE:10:cr300f:Qh|As:-100|100:player1|player2
+STATE:11:cc/cr300f:Kh|Qs/Qh:-100|100:player2|player1
+STATE:12:r1200f:As|Kh:100|-100:player1|player2
+STATE:13:cc/cr300f:Qh|Kh/Ah:-100|100:player2|player1
+STATE:14:cc/cc:Kh|Ks/Qs:0|0:player1|player2
+STATE:15:r1200f:As|Qs:100|-100:player2|player1
+STATE:16:cr300f:Qs|Ah:-100|100:player1|player2
+STATE:17:cr300c/cr1200f:Qs|Qh/As:-300|300:player2|player1
+STATE:18:cr1200f:Ks|As:-100|100:player1|player2
+STATE:19:cc/cr300f:Ah|Qs/Qh:-100|100:player2|player1
+STATE:20:cr300r1200f:Ah|Qh:300|-300:player1|player2
+STATE:21:cc/cc:Ks|Qh/Kh:100|-100:player2|player1
+STATE:22:cc/cc:Qs|Qh/As:0|0:player1|player2
+STATE:23:cr300f:Kh|Ah:-100|100:player2|player1
+STATE:24:cc/cr300f:Ks|Qs/Qh:-100|100:player1|player2
