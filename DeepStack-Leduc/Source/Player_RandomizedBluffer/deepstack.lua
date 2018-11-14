@@ -7,7 +7,7 @@ require "Player_RandomizedBluffer.continual_resolving"
 
 --1.0 create the ACPC game and connect to the server
 local acpc_game = ACPCGame()
-acpc_game:connect(arguments.acpc_server, arguments.acpc_server_port)
+acpc_game:connect(arguments.acpc_server, 20001)
 
 local continual_resolving = ContinualResolving()
 

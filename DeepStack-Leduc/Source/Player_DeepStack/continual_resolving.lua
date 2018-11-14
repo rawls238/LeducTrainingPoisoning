@@ -149,11 +149,6 @@ function ContinualResolving:_sample_bet(node, state)
   local possible_bets = self.resolving:get_possible_actions()
   local actions_count = possible_bets:size(1)
 
-  --MODIFICATION FOR RANDOM BLUFFER
-  --if there are raise bets available (if possible_bets includes numbers above 0) -- with prob .3 pick this
-  --skip steps 2 and 3 in that case
-  print('possible_bets, 'possible_bets)
-  print("max of this", torch.max(possible_bets))
 
   --2.0 get the strategy for the current hand since the strategy is computed for all hands
   local hand_strategy = arguments.Tensor(actions_count)

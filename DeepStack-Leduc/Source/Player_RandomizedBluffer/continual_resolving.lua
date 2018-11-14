@@ -4,7 +4,7 @@
 -- @classmod continual_resolving
 
 require 'Lookahead.resolving'
-local arguments = require 'Settings.arguments'
+local arguments = require 'Settings.arguments2'
 local constants = require "Settings.constants"
 local card_tools = require 'Game.card_tools'
 
