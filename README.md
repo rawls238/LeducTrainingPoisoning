@@ -60,6 +60,14 @@ Semi Bluffer (always plays on port 20001):
 `cd ./DeepStack-Leduc/Source`
 `th Player_SmartBluffer/deepstack.lua`
 
+Mild Adaptive Rocks (always plays on port 20001):
+`cd ./DeepStack-Leduc/Source`
+`th Player_MildAdaptiveRocks/deepstack.lua`
+
+Strong Adaptive Rocks (always plays on port 20001):
+`cd ./DeepStack-Leduc/Source`
+`th Player_StrongAdaptiveRocks/deepstack.lua`
+
 #### Rational Player:
 
 pretrained deepstack (always plays on port 20000):
