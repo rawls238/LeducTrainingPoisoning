@@ -56,6 +56,10 @@ Random Bluffer (always plays on port 20001):
 `cd ./DeepStack-Leduc/Source`
 `th Player_RandomizedBluffer/deepstack.lua`
 
+Semi Bluffer (always plays on port 20001):
+`cd ./DeepStack-Leduc/Source`
+`th Player_SmartBluffer/deepstack.lua`
+
 #### Rational Player:
 
 pretrained deepstack (always plays on port 20000):

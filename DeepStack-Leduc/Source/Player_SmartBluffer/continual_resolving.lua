@@ -130,6 +130,7 @@ function ContinualResolving:compute_action(node, state)
 
   local sampled_bet = self:_sample_bet(node, state)  
 
+  
   self.decision_id = self.decision_id + 1
   self.last_bet = sampled_bet
   self.last_node = node
@@ -171,16 +172,26 @@ function ContinualResolving:_sample_bet(node, state)
   local sampled_bet = possible_bets[hand_strategy_cumsum:gt(r)][1] 
 
 
-  
-  --MODIFICATION FOR RANDOM BLUFFER
-  --if raise exists, with prob .3 choose raise regardless of sampled_bet
-  local randomnum = math.random()
-  if torch.max(possible_bets) > 0 and randomnum < 0.3 then
+  --MODIFICATION FOR SMART BLUFFER
+  --get the opponents cfvs
+  opponents_cfvs = self.current_opponent_cfvs_bound
+  --get the original cfv for comparison
+  original_cfv = self.first_node_resolving:get_root_cfv()
+
+  print("opponent cfvs:")
+  print(opponents_cfvs)
+  print("sum")
+  print(torch.sum(opponents_cfvs))
+
+  --if raise exists and sum of opponents_cfvs less than original (they are in bad posit)
+  if torch.max(possible_bets) > 0 and torch.sum(opponents_cfvs) < torch.sum(original_cfv) then
     sampled_bet = torch.max(possible_bets)
-    print("randomly decided to bluff with a high raise")
+    print("decided to bluff with high raise, the opponent had bad prospects")
   else 
     print("playing action that has prob: ", hand_strategy[hand_strategy_cumsum:gt(r)][1])
   end
+  
+
   
   --4.0 update the invariants based on our action
   self.current_opponent_cfvs_bound = self.resolving:get_action_cfv(sampled_bet)

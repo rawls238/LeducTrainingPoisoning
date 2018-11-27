@@ -97,7 +97,6 @@ function ContinualResolving:_update_invariant(node, state)
     --1.1 opponent cfvs
     --if the street has changed, the resonstruction API simply gives us CFVs        
     self.current_opponent_cfvs_bound = self.resolving:get_chance_action_cfv(self.last_bet, node.board)
-   
     --1.2 player range
     --if street has change, we have to mask out the colliding hands
     self.current_player_range = card_tools:normalize_range(node.board, self.current_player_range)
