@@ -7,6 +7,7 @@ Right now, it reads through all of the log files and then aggregates the scores 
 '''
 import os
 import scipy.stats as sp
+import csv
 
 def aggregate_scores(log_name):
 	scores = {}
@@ -28,7 +29,7 @@ def aggregate_scores(log_name):
 
 
 weak_player_scores = {}
-for (root, dirs, files) in os.walk('logs/', topdown=True):
+for (root, dirs, files) in os.walk('../logs/', topdown=True):
 	for file in files:
 		if file.endswith('.log'):
 			scores = aggregate_scores(root + file)
@@ -36,4 +37,11 @@ for (root, dirs, files) in os.walk('logs/', topdown=True):
 				if key != 'deepStack':
 					weak_player_scores[key] = scores[key]
 
-print(sp.ttest_ind(weak_player_scores['allin'], weak_player_scores['alwayscall']))
+with open('results.csv', 'w') as fp:
+	writer_condensed = csv.writer(fp)
+	writer_condensed.writerow(['round', 'player', 'result'])
+	for key in weak_player_scores.keys():
+		r = 0
+		for val in weak_player_scores[key]:
+			writer_condensed.writerow([r, key, val])
+			r += 1
