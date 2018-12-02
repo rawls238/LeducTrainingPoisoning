@@ -39,17 +39,17 @@ params.data_path = '../Data/TrainSamples/PotBet/'
 --- path to the neural net model
 params.model_path = '../Data/Models/PotBet/'
 --- the name of the neural net file
-params.value_net_name = 'final'
+params.value_net_name = 'epoch_100'
 --- the neural net architecture
-params.net = '{nn.Linear(input_size, 50), nn.PReLU(), nn.Linear(50, output_size)}'
+params.net = '{nn.Linear(input_size, 50), nn.PReLU(), nn.Linear(50, 50), nn.PReLU(), nn.Linear(50, output_size)}'
 --- how often to save the model during training
-params.save_epoch = 2
+params.save_epoch = 100
 --- how many epochs to train for
-params.epoch_count = 10
+params.epoch_count = 100
 --- how many solved poker situations are generated for use as training examples
-params.train_data_count = 100
+params.train_data_count = 10000
 --- how many solved poker situations are generated for use as validation examples
-params.valid_data_count = 100
+params.valid_data_count = 10000
 --- learning rate for neural net training
 params.learning_rate = 0.001
 

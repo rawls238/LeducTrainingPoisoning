@@ -15,7 +15,7 @@ params.bet_sizing = {1}
 --- server running the ACPC dealer
 params.acpc_server = "localhost"
 --- server port running the ACPC dealer
-params.acpc_server_port = 20001
+params.acpc_server_port = 20000
 --- the number of betting rounds in the game
 params.streets_count = 2
 --- the tensor datatype used for storing DeepStack's internal data
@@ -39,7 +39,7 @@ params.data_path = '../Data/TrainSamples/PotBet/'
 --- path to the neural net model
 params.model_path = '../Data/Models/PotBet/'
 --- the name of the neural net file
-params.value_net_name = 'final'
+params.value_net_name = 'rockstrain_100'
 --- the neural net architecture
 params.net = '{nn.Linear(input_size, 50), nn.PReLU(), nn.Linear(50, 50), nn.PReLU(), nn.Linear(50, output_size)}'
 --- how often to save the model during training

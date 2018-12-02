@@ -27,7 +27,7 @@ end
 -- @return the index of the rank
 function M:card_to_rank(card)
   return torch.floor((card -1) / game_settings.suit_count ) + 1
-end;
+end
 
 --- Holds the string representation for every possible card, indexed by its 
 -- numeric representation.

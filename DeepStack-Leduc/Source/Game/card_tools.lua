@@ -140,6 +140,7 @@ end
 --- Gives the number of possible boards.
 -- @return the number of possible boards
 function M:get_boards_count()
+  -- In Leduc, board count = 6
   if game_settings.board_card_count == 1 then
     return game_settings.card_count
   elseif game_settings.board_card_count == 2 then 
@@ -152,8 +153,12 @@ end
 --- Initializes the board index table.
 -- @local
 function M:_init_board_index_table()
+
+  -- In Leduc, create a board index 1x6 tensor of values 1.0 to 6.0 (Incr. by 1)
   if game_settings.board_card_count == 1 then
     self._board_index_table = torch.range(1, game_settings.card_count):float()
+
+  -- Not used in Leduc
   elseif game_settings.board_card_count == 2 then
     self._board_index_table = arguments.Tensor(game_settings.card_count, game_settings.card_count):fill(-1)
     local board_idx = 0; 
@@ -171,14 +176,19 @@ end
 
 M:_init_board_index_table()
 
---- Gives a numerical index for a set of board cards.
+--- Gives a numerical index for a set of board cards
 -- @param board a non-empty vector of board cards
 -- @return the numerical index for the board
 function M:get_board_index(board)
+
+  -- Create a local index 1x6 tensor of values 1.0 to 6.0 (Incr. by 1)
   local index = self._board_index_table
+
+  -- Sets index to be a scalar value of the board card
   for i = 1, board:size(1) do 
     index = index[board[i]]
   end
+
   assert( index > 0, index)
   return index
 end

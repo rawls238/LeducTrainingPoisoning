@@ -14,31 +14,40 @@ local BucketConversion = torch.class('BucketConversion')
 function BucketConversion:__init()
 end
 
---- Sets the board cards for the bucketer.
+--- Sets the board cards for the bucketer
 -- @param board a non-empty vector of board cards
 function BucketConversion:set_board(board)
   self.bucketer = Bucketer()
+
+  -- For Leduc, bucket count is 36
   self.bucket_count = self.bucketer:get_bucket_count()
+
+  -- Create a NxK tensor of zeros, where N = 6 and K = 36
   self._range_matrix = arguments.Tensor(game_settings.card_count, self.bucket_count ):zero()
 
+  -- Create a vector mapping private hands to buckets based on a board card
   local buckets = self.bucketer:compute_buckets(board)
+
+  -- Create a 1x36 tensor with values 1 through 36
   local class_ids = torch.range(1, self.bucket_count)
 
   if arguments.gpu then 
     buckets = buckets:cuda() 
     class_ids = class_ids:cuda()
   else
+    -- Convert class tensor values to float values
     class_ids = class_ids:float() 
   end
 
+  -- Resize class and bucket tensors into 6x36 tensors
   class_ids = class_ids:view(1, self.bucket_count):expand(game_settings.card_count, self.bucket_count)
   local card_buckets = buckets:view(game_settings.card_count, 1):expand(game_settings.card_count, self.bucket_count)
 
-  --finding all strength classes      
-  --matrix for transformation from card ranges to strength class ranges 
+  -- Compute element-wise equality of class tensor and bucket tensor
+  -- Set Range Matrix as transformation from card ranges to class strength ranges 
   self._range_matrix[torch.eq(class_ids, card_buckets)] = 1
 
-  --matrix for transformation form class values to card values
+  --matrix for transformation from class values to card values
   self._reverse_value_matrix = self._range_matrix:t():clone()
 end
 
@@ -49,6 +58,8 @@ end
 -- @param bucket_range a vector in which to save the resulting probability 
 -- vector over buckets
 function BucketConversion:card_range_to_bucket_range(card_range, bucket_range)
+
+  -- Matrix Multiply card range and board range matrix
   bucket_range:mm(card_range, self._range_matrix)
 end
 

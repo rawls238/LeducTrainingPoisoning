@@ -21,11 +21,12 @@ end
 -- @param board_cards a non-empty vector of board cards
 -- @param call_matrix a tensor where the computed matrix is stored
 -- @local
-function TerminalEquity:get_last_round_call_matrix(board_cards, call_matrix)
+function TerminalEquity:get_last_round_call_matrix(board_cards, call_matrix, player)
   assert(board_cards:size(1) == 1 or board_cards:size(1) == 2, 'Only Leduc and extended Leduc are now supported' )
-  
-  local strength = evaluator:batch_eval(board_cards);
-  --handling hand stregths (winning probs);
+
+  -- Original: Handle current player
+  local strength = evaluator:batch_eval(board_cards, 1);
+
   local strength_view_1 = strength:view(game_settings.card_count, 1):expandAs(call_matrix)
   local strength_view_2 = strength:view(1, game_settings.card_count):expandAs(call_matrix)
 
@@ -33,6 +34,7 @@ function TerminalEquity:get_last_round_call_matrix(board_cards, call_matrix)
   call_matrix:csub(torch.lt(strength_view_1, strength_view_2):typeAs(call_matrix))
 
   self:_handle_blocking_cards(call_matrix, board_cards);
+  
 end
 
 --- Zeroes entries in an equity matrix that correspond to invalid hands.
@@ -43,10 +45,18 @@ end
 -- @param board a possibly empty vector of board cards
 -- @local
 function TerminalEquity:_handle_blocking_cards(equity_matrix, board)
+
+  -- Get valid hand indices based on board and resize to match equity matrix tenshor
   local possible_hand_indexes = card_tools:get_possible_hand_indexes(board);
   local possible_hand_matrix = possible_hand_indexes:view(1, game_settings.card_count):expandAs(equity_matrix);
+
+  -- Element-wise multiply equity tensor by valid hand tensor
   equity_matrix:cmul(possible_hand_matrix);
+
+  -- Axis-Transform the hand matrix
   possible_hand_matrix = possible_hand_indexes:view(game_settings.card_count,1):expandAs(equity_matrix);
+
+  -- Element-wise multiply equity tensor by axis-transformed valid hand tensor
   equity_matrix:cmul(possible_hand_matrix);
 end
 
@@ -74,36 +84,49 @@ end;
 --
 -- @param board a possibly empty vector of board cards
 -- @local
-function TerminalEquity:_set_call_matrix(board)
+function TerminalEquity:_set_call_matrix(board, player)
+
+  -- Get the current betting round based on the board
   local street = card_tools:board_to_street(board);
+
+  -- Create a NxN zero Tensor where N = card count (6 in Leduc)
   self.equity_matrix = arguments.Tensor(game_settings.card_count, game_settings.card_count):zero();
   
+  -- First betting round
   if street == 1 then
-    --iterate through all possible next round streets
+
+    -- Iterate through all possible next round streets and get count
     local next_round_boards = card_tools:get_second_round_boards();
     local boards_count = next_round_boards:size(1);
+
+    -- Create a NxN zero Tensor where N = card count (6 in Leduc)
     local next_round_equity_matrix = arguments.Tensor(game_settings.card_count, game_settings.card_count);
+
+    -- For each possible next round board, get matrix of showdown equity 
     for board = 1, boards_count do
-      self:get_last_round_call_matrix(next_round_boards[board], next_round_equity_matrix);
+      self:get_last_round_call_matrix(next_round_boards[board], next_round_equity_matrix, player);
       self.equity_matrix:add(next_round_equity_matrix);
     end;
-    --averaging the values in the call matrix
+
+    -- Average values in the call matrix
     local weight_constant = game_settings.board_card_count == 1 and 1/(game_settings.card_count -2) or 2/((game_settings.card_count -2) * (game_settings.card_count -3 ))
     self.equity_matrix:mul(weight_constant);
+
   elseif  street == 2  then
-    --for last round we just return the matrix
-    self:get_last_round_call_matrix(board, self.equity_matrix);
+    -- Last round, return equity matrix
+    self:get_last_round_call_matrix(board, self.equity_matrix, player);
+
   else
-    --impossible street
+    -- Impossible street (betting round)
     assert(false, 'impossible street');
   end
 end
 
 --- Sets the board cards for the evaluator and creates its internal data structures.
 -- @param board a possibly empty vector of board cards
-function TerminalEquity:set_board(board)
-    self:_set_call_matrix(board);
-    self:_set_fold_matrix(board);
+function TerminalEquity:set_board(board, player)
+    self:_set_call_matrix(board, player);
+    self:_set_fold_matrix(board, player);
 end
 
 --- Computes (a batch of) counterfactual values that a player achieves at a terminal node
