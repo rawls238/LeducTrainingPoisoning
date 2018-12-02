@@ -35,11 +35,11 @@ params.gen_batch_size = 10
 --- how many poker situations are used in each neural net training batch
 params.train_batch_size = 100
 --- path to the solved poker situation data used to train the neural net
-params.data_path = '../Data/TrainSamples/PotBet/'
+params.data_path = '../Data/TrainSamples/PotBet/rocksBias_10k/'
 --- path to the neural net model
 params.model_path = '../Data/Models/PotBet/'
 --- the name of the neural net file
-params.value_net_name = 'rockstrain_1000'
+params.value_net_name = 'rocksBias_1000'
 --- the neural net architecture
 params.net = '{nn.Linear(input_size, 50), nn.PReLU(), nn.Linear(50, 50), nn.PReLU(), nn.Linear(50, output_size)}'
 --- how often to save the model during training
