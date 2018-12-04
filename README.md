@@ -17,7 +17,7 @@ luasocket
 `make`
 
 2. Setup the acpc client:
-`cd code/acpc-python-client/`
+`cd ruleBased-Players/acpc-python-client/`
 `python setup.py install`
 
 
