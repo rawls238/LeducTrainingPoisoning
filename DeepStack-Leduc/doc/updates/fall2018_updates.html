@@ -104,8 +104,10 @@
   <dl class="function">
     <dt><strong>data_generation.lua</strong></dt>
       <dd>Modified to alter the returned bucket ranges, impacting the CFV computation of the opponent's hands in training.</dd>
-    <strong>bucket_conversion.lua</strong>
-      <dd>Modified to alter the card range to bucket range conversion logic of the opponent to reflect adaptive rocks logic.</dd>
+    <strong>range_generator.lua</strong>
+      <dd>Modified to alter how the batch evaluator function was called with initializing a range generator object.</dd>
+    <strong>evaluator.lua</strong>
+      <dd>Modified the batch evaluate, evaluate and two-card evaluate functions alter the card range to hand strength conversion logic of the opponent to reflect rocks logic, which subsequently influenced the counterfactual values.</dd>
     </dt>
   </dl>
 <h2 class="section-header ">Functions Modified</h2>

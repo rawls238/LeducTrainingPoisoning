@@ -2,36 +2,32 @@
 # Fall 2018 Deep Learning Project Repo
 
 
-## libraries:
+## Libraries:
 torch 
 lua
 luarocks
 luasocket
 
-# to run a match:
+# To Run a Match:
 
-
-## SETTING UP ENVIRONMENT
+## Environment Setup 
 1. Run make in the ACPCServer Directory: 
 `cd DeepStack-Leduc/ACPCServer`
 `make`
-
-2. Setup the acpc client:
+2. Setup the acpc client (Note: Ensure you are using Python 3):
 `cd ruleBased-Players/acpc-python-client/`
 `python setup.py install`
 
-
-## CONFIGURING GAME/PLAYERS
-1. connect the server.  
-`./DeepStack-Leduc/ACPCServer/dealer <name_of_game> ./DeepStack-Leduc/ACPCServer/leduc.game <#hands> <rngSeed> <p1name> <p2name> -p 20000,20001 > <name_of_output_file>`
-
-2. in separate tab, connect player 1
-3. in separate tab, connect player 2
-
+## Configuring the Game & Players
+1. Connect the server by starting the dealer. Run the following command: 
+`./DeepStack-Leduc/ACPCServer/dealer <name_of_game> ./DeepStack-Leduc/ACPCServer/leduc.game <#hands> <rngSeed> <p1name> <p2name> -p 20000,20001 <name_of_output_file>`
+2. In a separate tab, connect Player 1
+3. In a separate tab, connect Player 2
 
 ### Players and how to connect them:
 
-#### testing players:
+#### Simple Control Players:
+Three control players were used that modeled the "Always Call", "All In" and "Random" playing profiles.
 
 always_call.py -- always calls
 `python ./ruleBased-Players/ESMCCFR-LEDUC/always_call.py ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>`
@@ -42,7 +38,8 @@ allin_net.py -- always raises max amount:
 selects random valid action:
 `./DeepStack-Leduc/ACPCServer/example_player ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>`
 
-#### rule-based irrational players:
+#### Rule-based irrational players:
+Two conservative playing profiles were explore in this project. To run them, use the following commands.
 
 Rocks Player (very conservative):
 `python ./ruleBased-Players/ESMCCFR-LEDUC/rocks.py ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>`
@@ -51,6 +48,7 @@ Passive Rocks Player (less conservative):
 `python ./ruleBased-Players/ESMCCFR-LEDUC/passiveRocks.py ./DeepStack-Leduc/ACPCServer/leduc.game localhost <port>`
 
 #### "Smart" Irrational Players:
+Four semi-rational and irrational playing profiles were built on top of DeepStack. To run them, use the following commands.
 
 Random Bluffer (always plays on port 20001):
 `cd ./DeepStack-Leduc/Source`
@@ -69,8 +67,7 @@ Strong Adaptive Rocks (always plays on port 20001):
 `th Player_StrongAdaptiveRocks/deepstack.lua`
 
 #### Rational Player:
-
-pretrained deepstack (always plays on port 20000):
+To run a pretrained Deepstack (always plays on port 20000):
 `cd ./DeepStack-Leduc/Source`
 `th Player_DeepStack/deepstack.lua`
 
