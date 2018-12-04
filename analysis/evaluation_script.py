@@ -23,25 +23,37 @@ def aggregate_scores(log_name):
 			if p2 not in scores:
 				scores[p2] = []
 			score = float(line_split[2].split(':')[0])
-			scores[p1].append(score)
-			scores[p2].append(-1*score)
+			scores[p2].append(score)
+			scores[p1].append(-1*score)
 	return scores
 
+def get_scores(f):
+	profile_scores = {}
+	for (root, dirs, files) in os.walk(f, topdown=True):
+		for file in files:
+			if file.endswith('.log'):
+				scores = aggregate_scores(root +file)
+				for key in scores.keys():
+					profile_scores[key] = scores[key]
+	return profile_scores
 
-weak_player_scores = {}
-for (root, dirs, files) in os.walk('../logs/', topdown=True):
-	for file in files:
-		if file.endswith('.log'):
-			scores = aggregate_scores(root + file)
-			for key in scores.keys():
-				if key != 'deepStack':
-					weak_player_scores[key] = scores[key]
+unbiased_player_scores = get_scores('../logs/1k Games/Trial2-ControlDS/')
+biased_player_scores = get_scores('../logs/1k Games/Trial2-BiasDS/')
 
 with open('results.csv', 'w') as fp:
 	writer_condensed = csv.writer(fp)
-	writer_condensed.writerow(['round', 'player', 'result'])
-	for key in weak_player_scores.keys():
+	writer_condensed.writerow(['type', 'round', 'player', 'result'])
+	for key in biased_player_scores.keys():
 		r = 0
-		for val in weak_player_scores[key]:
-			writer_condensed.writerow([r, key, val])
+		for val in biased_player_scores[key]:
+			if key == 'mild_adaptive':
+				key = 'mildadaptive_rocks'
+			elif key == 'random_bluffer':
+				key = 'randomizedbluffer'
+			writer_condensed.writerow(['biased', r, key, val])
+			r += 1
+	for key in unbiased_player_scores.keys():
+		r = 0
+		for val in unbiased_player_scores[key]:
+			writer_condensed.writerow(['unbiased', r, key, val])
 			r += 1
