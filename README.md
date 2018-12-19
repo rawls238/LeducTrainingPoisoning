@@ -1,6 +1,4 @@
-# deep_learning_project
-# Fall 2018 Deep Learning Project Repo
-
+Implementation of Training Data Poisoning for Imperfect Information Games, Guy Aridor, Natania Wolansky, Jisha Jacob, Iddo Drori, 2018.
 
 ## Libraries:
 torch 
