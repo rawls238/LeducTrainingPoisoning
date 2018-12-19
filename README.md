@@ -1,5 +1,11 @@
 Implementation of Training Data Poisoning for Imperfect Information Games, Guy Aridor, Natania Wolansky, Jisha Jacob, Iddo Drori, 2018.
 
+This work explores how simple strategies in the game of Leduc Hold'em can be used to beat a sophisticated poker AI, DeepStack. We first analyze, under unbiased training, how significantly DeepStack outperforms most traditional poker-playing strategy profiles employed by humans. We then consider the ability of an opponent to bias the training phase such that DeepStack is optimized to play against a particular strategy profile. Finally, by allowing for this biasing, we show that DeepStack can be defeated by a subset of strategy profiles if the player can change their strategy post-training. While DeepStack achieves nearly super-human performance, we conclude that DeepStack is susceptible to training poisoning.
+
+The raw log files containing the results of each individual hand can be found in the log folder.
+
+
+
 ## Libraries:
 torch 
 lua
