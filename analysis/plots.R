@@ -1,16 +1,17 @@
 library(tidyverse)
 library(xtable)
 
-dir <- "/Users/guyaridor/Desktop/deep_learning_project/analysis/"
+dir <- "/Users/guyaridor/Desktop/LeducTrainingPoisoning/analysis/"
 dat <- read.csv(paste(dir, "results.csv", sep=""))
 dat <- filter(dat, player != "deepstack")
 dat$result <- as.numeric(dat$result)
 
 players <- unique(dat$player)
+#players <- c("strongadaptive_rocks")
+
 for (player in players) {
   filtered_dat <- filter(dat, player == UQ(player))
-  q <- ggplot(filtered_dat, aes(x=result, color=type)) + geom_density() + 
-    ggtitle(paste(player, "Distribution of Results")) + xlab("Chips Won")
+  q <- ggplot(filtered_dat, aes(x=result, color=type)) + geom_density() + ggtitle(player) + theme_bw(base_size = 16) + xlab("chips won")
   print(q)
 }
 

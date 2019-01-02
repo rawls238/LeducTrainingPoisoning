@@ -1,0 +1,87 @@
+%%%%%%%% ICML 2019 EXAMPLE LATEX SUBMISSION FILE %%%%%%%%%%%%%%%%%
+
+\documentclass[10pt]{article}
+
+% Recommended, but optional, packages for figures and better typesetting:
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs} % for professional tables
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% hyperref makes hyperlinks in the resulting PDF.
+% If your build breaks (sometimes temporarily if a hyperlink spans a page)
+% please comment out the following usepackage line and replace
+% \usepackage{icml2019} with \usepackage[nohyperref]{icml2019} above.
+\usepackage{hyperref}
+
+
+
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Use the following line for the initial blind version submitted for review:
+%\usepackage{icml2019}
+
+\usepackage[utf8x]{inputenc}
+
+% If accepted, instead use the following line for the camera-ready submission:
+\usepackage[accepted]{icml2019}
+
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+\icmltitlerunning{Training Data Poisoning for Imperfect Information Games}
+
+\begin{document}
+\onecolumn
+\icmltitle{\textit{Training Data Poisoning for Imperfect Information Games}}
+% It is OKAY to include author information, even for blind
+% submissions: the style file will automatically remove it for you
+% unless you've provided the [accepted] option to the icml2019
+% package.
+
+% List of affiliations: The first argument should be a (short)
+% identifier you will use later to specify author affiliations
+% Academic affiliations should list Department, University, City, Region, Country
+% Industry affiliations should list Company, City, Region, Country
+
+% You can specify symbols, otherwise they are numbered in order.
+% Ideally, you should not use this facility. Affiliations will be numbered
+\icmlsetsymbol{equal}{*}
+
+\begin{icmlauthorlist}
+\icmlauthor{\textbf{Guy Aridor}}{cuecon}
+\icmlauthor{Natania Wolansky}{cu}
+\icmlauthor{Jisha Jacob}{cu}
+\icmlauthor{Iddo Drori}{cu}
+\end{icmlauthorlist}
+
+\icmlaffiliation{cuecon}{Department of Economics, Columbia University, New York, New York, United States}
+\icmlaffiliation{cu}{Department of Computer Science, Columbia University, New York, New York, United States}
+
+
+\icmlcorrespondingauthor{}
+
+% You may provide any keywords that you
+% find helpful for describing your paper; these are used to populate
+% the "keywords" metadata in the PDF but will not be shown in the document
+\icmlkeywords{Machine Learning, Imperfect Information Games}
+
+\vskip 0.3in
+
+\pagestyle{empty}
+
+% this must go after the closing bracket ] following \twocolumn[ ...
+
+% This command actually creates the footnote in the first column
+% listing the affiliations and the copyright notice.
+% The command takes one argument, which is text to display at the start of the footnote.
+% The \icmlEqualContribution command is standard text for equal contribution.
+% Remove it (just {}) if you do not need this facility.
+
+\printAffiliationsAndNotice{}  % leave blank if no need to mention equal contribution
+%\printAffiliationsAndNotice{\icmlEqualContribution} % otherwise use the standard text.
+Most of the recent breakthrough work in artificial intelligence has been in developing agents that can play difficult multi-agent games such as chess, shogi, Go, or poker at super-human levels. However, are these agents susceptible to defeat by strategic agents with little computational power but with the ability to bias training? In real world chess and poker tournaments, grandmasters and expert players often use strategies of deception in practice rounds and early rounds of the tournament to confuse their opponents about the strategies they employ later on. This work explores how simple strategies in the game of Leduc Hold’em can be used to beat a sophisticated poker AI, DeepStack. We first implement agents that exhibit the behavioral biases that have been empirically observed in individuals playing poker. We then play these sub-optimal agents against an unbiased trained DeepStack and show how significantly DeepStack outperforms these traditional strategy profiles. We then consider the ability of an opponent to bias the training phase such that DeepStack is optimized to play against a particular strategy profile as opposed to approximating a Nash Equilibrium. Finally, by allowing for this biasing, we show that DeepStack can be defeated by a subset of strategy profiles if the player can change their strategy post-training. While DeepStack achieves nearly super-human performance, we conclude that DeepStack is susceptible to training poisoning.
+
+\end{document}

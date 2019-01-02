@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
+The style file: icml2019.bst
+Database file #1: bibliography.bib
+Warning--empty journal in teafilo2013
+You've used 16 entries,
+            2773 wiz_defined-function locations,
+            683 strings with 7678 characters,
+and the built_in function-call counts, 8184 in all, are:
+= -- 723
+> -- 510
+< -- 12
++ -- 172
+- -- 156
+* -- 628
+:= -- 1223
+add.period$ -- 50
+call.type$ -- 16
+change.case$ -- 100
+chr.to.int$ -- 16
+cite$ -- 33
+duplicate$ -- 374
+empty$ -- 643
+format.name$ -- 180
+if$ -- 1747
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 13
+newline$ -- 89
+num.names$ -- 64
+pop$ -- 219
+preamble$ -- 1
+purify$ -- 84
+quote$ -- 0
+skip$ -- 324
+stack$ -- 0
+substring$ -- 275
+swap$ -- 72
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 176
+warning$ -- 1
+while$ -- 67
+width$ -- 0
+write$ -- 209
+(There was 1 warning)
